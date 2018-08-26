@@ -1,0 +1,35 @@
+/* main.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background: url(../images/grumpground.jpg) no-repeat 0 0;
+}
+
+#page {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+/* Main Divs */
+
+.sections-container {
+    width: 960px;
+    position: relative;
+}
+
+.section {
+    height: 300px;
+    width: 474px;
+    float: left;
+    border: #000 dashed 2px;
+    background-color: #fff;
+}
