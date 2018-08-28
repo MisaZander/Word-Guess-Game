@@ -18,6 +18,7 @@ body {
 /* Text */
 p {
     color: #fff;
+    text-align: center;
 }
 
 h1, h2 {
@@ -33,9 +34,19 @@ h1, h2 {
 }
 
 .section {
-    height: 300px;
+    height: 350px;
     width: 474px;
     float: left;
     border: #000 dashed 2px;
     background-color: #444;
+    overflow: hidden;
+}
+
+/* Scoreboard */
+
+#scoreboard {
+    width: 400px;
+    height: 200px;
+    margin: 0 35px;
+    border: 2px solid #049b18;
 }
