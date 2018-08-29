@@ -34,7 +34,7 @@ h1, h2 {
 }
 
 .section {
-    height: 350px;
+    height: 400px;
     width: 474px;
     float: left;
     border: #000 dashed 2px;
@@ -46,7 +46,13 @@ h1, h2 {
 
 #scoreboard {
     width: 400px;
-    height: 200px;
+    height: 300px;
     margin: 0 35px;
     border: 2px solid #049b18;
+    position: relative;
+}
+
+.scoreboard-half {
+    width: 400px;
+    height: 150px;
 }
