@@ -1,5 +1,20 @@
 /* main.css */
 
+@font-face {
+    font-family: 'Sports Night';
+    src: url(../fonts/SFSportsNight.ttf);
+}
+
+@font-face {
+    font-family: 'Cowboys';
+    src: url(../fonts/Cowboys.ttf);
+}
+
+@font-face {
+    font-family: 'Stencil';
+    src: url(../fonts/octin-stencil-rg.ttf);
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -13,6 +28,7 @@ body {
 #page {
     max-width: 960px;
     margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Text */
@@ -24,6 +40,28 @@ p {
 h1, h2 {
     text-align: center;
     color: #fff;
+}
+
+h1 {
+    font-family: 'Sports Night', sans-serif;
+    font-size: 100px;
+    display: block;
+    font-weight: bold;
+    margin: .2em 0;
+}
+
+h2 {
+    font-family: 'Cowboys', sans-serif;
+    font-size: 50px;
+    display: block;
+    font-weight: bold;
+    margin: .15em 0;
+}
+
+h2.score {
+    font-size: 40px;
+    font-family: 'Stencil', sans-serif;
+    text-decoration: underline;
 }
 
 /* Main Divs */
