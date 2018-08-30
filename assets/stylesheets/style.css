@@ -15,6 +15,11 @@
     src: url(../fonts/octin-stencil-rg.ttf);
 }
 
+@font-face {
+    font-family: 'Fader';
+    src: url(../fonts/Ride-the-Fader.ttf);
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -106,15 +111,37 @@ div.score {
 div.score h3 {
     text-align: center;
     display: block;
-    font-size: 20px;
+    font-size: 24px;
     margin: .5em 0 0 0;
     text-decoration: underline;
     font-family: 'Stencil';
+    color: #fff;
 }
 
 div.logo {
     width: 133px;
     height: 150px;
     float: left;
+}
+
+div.logo img {
+    margin: 1px;
+}
+
+div.number {
+    height: 90px;
+    width: 90px;
+    border: 1px solid red;
+    margin: 10px auto;
+    background-color: #000;
+}
+
+div.number h4 {
+    font-family: 'Fader', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    display: block;
+    color: red;
+    margin: 15px 5px;
 }
 
