@@ -108,7 +108,7 @@ div.score {
     float: left;
 }
 
-div.score h3, div.ballout h3, div.strike {
+div.score h3, div.ballout h3, div.strike h3 {
     text-align: center;
     display: block;
     font-size: 24px;
@@ -149,6 +149,7 @@ div.ballout {
     width: 100px;
     height:150px;
     float: left;
+    /* padding: 0 5px; */
 }
 
 div.strike {
@@ -157,3 +158,20 @@ div.strike {
     float: left;
 }
 
+div.letter {
+    height: 35px;
+    /* width: 90px; */
+    border: 1px solid red;
+    margin: 20px auto;
+    background-color: #000;
+}
+
+div.letter h4 {
+    font-family: 'Fader', sans-serif;
+    font-size: 24px;
+    text-align: center;
+    /* display: block; */
+    color: red;
+    margin: 7px 5px;
+    text-decoration: none;
+}
