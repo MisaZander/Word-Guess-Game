@@ -6,5 +6,7 @@ var hangman = {
                 "penalty", "safety", "referee", "dunk",
                 "hook", "slice", "basket", "club",
                 "baseball", "homerun", "sideline", "bench",
-                "coach"]
+                "coach", "huddle"]
 };
+
+//Initialize

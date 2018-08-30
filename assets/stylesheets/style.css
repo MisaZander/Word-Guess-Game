@@ -33,13 +33,13 @@ body {
 #page {
     max-width: 960px;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Text */
 p {
     color: #fff;
-    text-align: center;
+    text-align: right;
 }
 
 h1, h2 {
@@ -174,4 +174,12 @@ div.letter h4 {
     color: red;
     margin: 7px 5px;
     text-decoration: none;
+}
+
+/* The Word Field */
+
+.the-word {
+    font-size: 60px;
+    font-family: 'Stencil', sans-serif;
+    text-align: center;
 }
