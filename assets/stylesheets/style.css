@@ -58,7 +58,7 @@ h2 {
     margin: .15em 0;
 }
 
-h2.score {
+h2.score-header {
     font-size: 40px;
     font-family: 'Stencil', sans-serif;
     text-decoration: underline;
@@ -88,9 +88,33 @@ h2.score {
     margin: 0 35px;
     border: 2px solid #049b18;
     position: relative;
+    background-color: #049b18;
 }
 
 .scoreboard-half {
     width: 400px;
     height: 150px;
+    position: relative;
 }
+
+div.score {
+    width: 133px;
+    height: 150px;
+    float: left;
+}
+
+div.score h3 {
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    margin: .5em 0 0 0;
+    text-decoration: underline;
+    font-family: 'Stencil';
+}
+
+div.logo {
+    width: 133px;
+    height: 150px;
+    float: left;
+}
+
