@@ -2,6 +2,7 @@ var hangman = {
     wins: 0,
     losses: 0,
     strikes: 0,
+    theActualWord: "",
     theWord: [],
     theBird: [],
     letterBank: [],
@@ -52,6 +53,7 @@ var hangman = {
     initWord: function() {
         let theword = this.wordbank[parseInt(Math.random() * this.wordbank.length)];
         console.log(theword);
+        this.theActualWord = theword;
         let blank = "";
         for (var i = 0; i < theword.length; i++) {
             hangman.theWord.push("_");
@@ -69,19 +71,37 @@ var hangman = {
 
     updateWords: function() {
         let string = "";
+        //Update the guess word
         for(let i = 0; i < this.theWord.length; i++) {
-            
+            string += this.theWord[i];
+            string += " ";
         }
+        theWord.textContent = string;
+        string = "";
+
+        //Update the letter bank
+        for(let i = 0; i < this.letterBank.length; i++) {
+            string += this.letterBank[i];
+            string += " ";
+        }
+        letterBank.textContent = string;
     },
 
     guessLetter: function(letter) {
         //Has it been guessed? AND is the key typed a letter?
-        if(this.letterBank.indexOf(letter) !== -1 && typeof letter === "string" && letter.length === 1
-        && (letter >= "a" && letter <= "z" || letter >= "A" && letter <= "Z") ){
-            return; //exit the function entirely if letter already exists in the bank OR not a letter typed
+        // if(this.letterBank.indexOf(letter) !== -1 && typeof letter === "string" && letter.length === 1
+        // && !(letter >= "a" && letter <= "z" || letter >= "A" && letter <= "Z") ){
+        //     return; //exit the function entirely if letter already exists in the bank OR not a letter typed
+        // }
+
+        //If letter is already in the bank OR is not lowercase alpha, end the function immediately
+        if((this.letterBank.indexOf(letter) !== -1) || !(letter >= "a" && letter <= "z")){
+            return;
         }
 
-        let correct = false; //If the below checker finds a correct letter, this changes to true
+        //This function adds the letter guessed to the word if correct
+        //Else: it adds it to the word bank if the letter is wrong
+        let correct = false;
         for(var i = 0; i < this.theBird.length; i++){
             if(this.theBird[i] === letter) {
                 //If there's a letter found, set theWord
@@ -89,6 +109,7 @@ var hangman = {
                 correct = true;
             }
         }
+        this.updateWords();
 
         if(!correct) {
             this.strikes++;
@@ -96,17 +117,24 @@ var hangman = {
             if(this.strikes !== 10) {
                 //Add a strike
                 this.setStrikes();
+                this.letterBank.push(letter);
+                this.updateWords();
             } else {
                 //Game over
                 this.setStrikes();
+                this.letterBank.push(letter);
+                this.updateWords();
                 //Play a sound here
-                alert("Game Over");
                 
                 //Add a loss
                 this.losses++;
                 this.setWinsLosses();
-
+                
+                alert("Game Over! " + this.theActualWord + " was what you wanted. " + this.theActualWord + ".");
+                
                 //Start a new game
+                this.strikes = 0;
+                this.setStrikes();
                 this.clearLetterBank();
                 this.initWord();
             } //else
