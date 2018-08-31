@@ -16,7 +16,7 @@ var winText = document.getElementById("wins");
 var lossText = document.getElementById("losses");
 var strikeText = document.getElementById("strikes");
 var theWord = document.getElementById("the-word");
-var wordBank = document.getElementById("word-bank");
+var letterBank = document.getElementById("letter-bank");
 
 //Initialize
 init();
@@ -26,7 +26,7 @@ function init() {
     setWinsLosses(hangman.wins, hangman.losses);
     setStrikes(hangman.strikes);
     initWord();
-    clearWordBank();
+    clearLetterBank();
 }
 
 function setWinsLosses(wins, losses) {
@@ -59,10 +59,18 @@ function setStrikes(strikes) {
 }
 
 function initWord() {
-    let theWord = hangman.wordbank[parseInt(Math.random() * hangman.wordbank.length)];
-    
+    let theword = hangman.wordbank[parseInt(Math.random() * hangman.wordbank.length)];
+    console.log(theword);
+    let blank = "";
+    for (var i = 0; i < theword.length; i++) {
+        hangman.theWord.push("_");
+        blank += "_ ";
+    }
+
+    theWord.innerText = blank;
 }
 
-function clearWordBank() {
-
+function clearLetterBank() {
+    hangman.letterBank.length = 0;
+    letterBank.textContent = "";
 }
