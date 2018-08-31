@@ -2,10 +2,10 @@ var hangman = {
     wins: 0,
     losses: 0,
     strikes: 0,
-    theActualWord: "",
-    theWord: [],
-    theBird: [],
-    letterBank: [],
+    theActualWord: "", //The word to guess. Alerted at the end
+    theWord: [], //The word to guess, initially blanked
+    theBird: [], //The bird is the word. The correct word to guess
+    letterBank: [], //The array of incorrectly guessed letters
     wordbank: ["football", "basketball", "hockey", "golf",
                 "soccer", "touchdown", "slapshot", "foul",
                 "penalty", "safety", "referee", "dunk",
@@ -39,11 +39,15 @@ var hangman = {
 
     setStrikes: function() {
         let strikeString = "";
-        for(var i = 1; i <= 10; i++) {
+        for(var i = 1; i <= 11; i++) {
             if(this.strikes < i) {
-                strikeString += "O";
+                if(i !== 11){
+                    strikeString += "O"; //Don't tack an 11th O to the end
+                }
             } else {
-                strikeString += "X";
+                if(i !== 11){
+                    strikeString += "X"; //Don't tack an 11th X to the end
+                }
             }
         }
         
@@ -51,13 +55,15 @@ var hangman = {
     },
 
     initWord: function() {
+        this.theWord = []; //Reset the word
+        this.theBird = [];
         let theword = this.wordbank[parseInt(Math.random() * this.wordbank.length)];
         console.log(theword);
         this.theActualWord = theword;
         let blank = "";
         for (var i = 0; i < theword.length; i++) {
-            hangman.theWord.push("_");
-            hangman.theBird.push(theword.charAt(i));
+            this.theWord.push("_");
+            this.theBird.push(theword.charAt(i));
             blank += "_ ";
         }
 
@@ -87,13 +93,7 @@ var hangman = {
         letterBank.textContent = string;
     },
 
-    guessLetter: function(letter) {
-        //Has it been guessed? AND is the key typed a letter?
-        // if(this.letterBank.indexOf(letter) !== -1 && typeof letter === "string" && letter.length === 1
-        // && !(letter >= "a" && letter <= "z" || letter >= "A" && letter <= "Z") ){
-        //     return; //exit the function entirely if letter already exists in the bank OR not a letter typed
-        // }
-
+    guessLetter: async function(letter) {
         //If letter is already in the bank OR is not lowercase alpha, end the function immediately
         if((this.letterBank.indexOf(letter) !== -1) || !(letter >= "a" && letter <= "z")){
             return;
@@ -129,6 +129,7 @@ var hangman = {
                 //Add a loss
                 this.losses++;
                 this.setWinsLosses();
+                await sleep(1500);
                 
                 alert("Game Over! " + this.theActualWord + " was what you wanted. " + this.theActualWord + ".");
                 
@@ -137,8 +138,27 @@ var hangman = {
                 this.setStrikes();
                 this.clearLetterBank();
                 this.initWord();
+                return; //Don't go any further
             } //else
         }//if !correct
+
+        //UR WINNAR!
+        //If there is no blank in the word, you solved it!
+        if(this.theWord.indexOf("_") === -1){
+            //Add a win
+            this.wins++;
+            this.setWinsLosses();
+
+            await sleep(1500);
+            alert("UR WINNAR!");
+
+            //Start a new game
+            this.strikes = 0;
+            this.setStrikes();
+            this.clearLetterBank();
+            this.initWord();
+        }
+
     }//guessletter()
 };
 
@@ -154,4 +174,8 @@ hangman.init();
 
 document.onkeyup = function(e) {
     hangman.guessLetter(e.key);
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
