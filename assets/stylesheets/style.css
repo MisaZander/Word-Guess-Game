@@ -40,6 +40,7 @@ body {
 p {
     color: #fff;
     text-align: right;
+    margin-right: 40px;
 }
 
 h1, h2 {

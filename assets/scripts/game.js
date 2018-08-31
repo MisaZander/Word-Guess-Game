@@ -11,9 +11,11 @@ var hangman = {
                 "penalty", "safety", "referee", "dunk",
                 "hook", "slice", "basket", "club",
                 "baseball", "homerun", "sideline", "bench",
-                "coach", "huddle"],
+                "coach", "huddle", "curveball", "gambit",
+                "flag", "quarterback", "tackle", "scoreboard"],
     
     init: function() {
+        //This function is called on load, and resets everything
         this.wins = this.losses = this.strikes = 0;
         this.setWinsLosses();
         this.setStrikes();
@@ -22,14 +24,17 @@ var hangman = {
     },
 
     setWinsLosses: function() {
+        //This function changes the number of wins and losses on the scoreboard
         this.wins = parseInt(this.wins);
         this.losses = parseInt(this.losses);
+        //If wins is less than 10, prepend a 0
         if(this.wins < 10) {
             winText.textContent = "0" + this.wins;
         } else {
             winText.textContent = this.wins;
         }
     
+        //If losses is less than 10, prepend a 0
         if(this.losses < 10) {
             lossText.textContent = "0" + this.losses;
         } else {
@@ -38,6 +43,7 @@ var hangman = {
     },
 
     setStrikes: function() {
+        //This function fills the scoreboard with the requisite number of strikes
         let strikeString = "";
         for(var i = 1; i <= 11; i++) {
             if(this.strikes < i) {
@@ -49,33 +55,36 @@ var hangman = {
                     strikeString += "X"; //Don't tack an 11th X to the end
                 }
             }
-        }
-        
+        }        
         strikeText.textContent = strikeString;
     },
 
     initWord: function() {
+        //This function clears out the words, picks a new word, and fills the words
         this.theWord = []; //Reset the word
-        this.theBird = [];
-        let theword = this.wordbank[parseInt(Math.random() * this.wordbank.length)];
-        console.log(theword);
-        this.theActualWord = theword;
+        this.theBird = []; //Reset the bird, which is the word
+        let theword = this.wordbank[parseInt(Math.random() * this.wordbank.length)]; //Pick a random word
+        // console.log(theword);
+        this.theActualWord = theword; //This property is alerted at the end at game over
         let blank = "";
         for (var i = 0; i < theword.length; i++) {
+            //Fill theWord with blanks and theBird with the correct answer
             this.theWord.push("_");
             this.theBird.push(theword.charAt(i));
             blank += "_ ";
         }
-
         theWord.innerText = blank;
     },
 
     clearLetterBank: function() {
-        this.letterBank.length = 0;
+        //This function empties the letter bank
+        this.letterBank = [];
         letterBank.textContent = "";
     },
 
     updateWords: function() {
+        //This function updates the words in the HTML
+
         let string = "";
         //Update the guess word
         for(let i = 0; i < this.theWord.length; i++) {
@@ -94,6 +103,9 @@ var hangman = {
     },
 
     guessLetter: async function(letter) {
+        //This function takes a letter from the keyboard as an argument and processes it
+        //The decision to continue, end, or start a new game occurs here too
+
         //If letter is already in the bank OR is not lowercase alpha, end the function immediately
         if((this.letterBank.indexOf(letter) !== -1) || !(letter >= "a" && letter <= "z")){
             return;
@@ -111,6 +123,7 @@ var hangman = {
         }
         this.updateWords();
 
+        //If a correct letter wasn't found, add a strike and possibly end the game
         if(!correct) {
             this.strikes++;
 
@@ -129,7 +142,7 @@ var hangman = {
                 //Add a loss
                 this.losses++;
                 this.setWinsLosses();
-                await sleep(1500);
+                await sleep(1500); //Wait 1.5 seconds to allow the HTML to update before executing the alert
                 
                 alert("Game Over! " + this.theActualWord + " was what you wanted. " + this.theActualWord + ".");
                 
@@ -149,7 +162,7 @@ var hangman = {
             this.wins++;
             this.setWinsLosses();
 
-            await sleep(1500);
+            await sleep(1500);//Wait 1.5 seconds to allow the HTML to update before executing the alert
             alert("UR WINNAR!");
 
             //Start a new game
