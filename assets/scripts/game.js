@@ -3,6 +3,7 @@ var hangman = {
     losses: 0,
     strikes: 0,
     theWord: [],
+    theBird: [],
     letterBank: [],
     wordbank: ["football", "basketball", "hockey", "golf",
                 "soccer", "touchdown", "slapshot", "foul",
@@ -64,6 +65,7 @@ function initWord() {
     let blank = "";
     for (var i = 0; i < theword.length; i++) {
         hangman.theWord.push("_");
+        hangman.theBird.push(theword.charAt(i));
         blank += "_ ";
     }
 
@@ -73,4 +75,8 @@ function initWord() {
 function clearLetterBank() {
     hangman.letterBank.length = 0;
     letterBank.textContent = "";
+}
+
+function guessLetter(letter) {
+
 }
